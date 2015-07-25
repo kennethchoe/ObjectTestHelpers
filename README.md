@@ -3,7 +3,7 @@ What Not To Do
 
 Auto-mappers are great, but you should not assume everything you add will be mapped automatically and successfully since most of them has default behaviour of ignoring non-mappable properties. How do you catch mistakes like:
 
-1. You added new property on domain model and view model, but spelled them differently so auto-mapper did not recognize them to be connected.
+1. You added new property on domain model and view model, but spelled them differently so auto-mapper did not recognize them to be mapped.
 2. You added new property on domain model and repository's Get() function, but did not change Update() function.
 
 Also, you don't want to have test code that repeats mapper code. For example:
@@ -77,9 +77,7 @@ Testing One-Way Mapping
 
 Sometimes mapping is one way. You map from domain model to view model, but changes are not likely be recorded using the same view model. 
 
-If you were using view model for retrieving and saving, most likely your view model will have responsibility for two different concerns - contain sufficient data for displaying and editing information, and contain sufficient data for changed information. For Dropdown, you need to provide value and the list for editing, but you need only new value for saving. For Save button, you may accept user comment so that you can record it on a log. View model contains all properties all the time and they are active depending on the context. You don't want to do this.
-
-Anyway, how can we test one-way mapping? The idea is that source property change should result in one of the destination property to be changed.
+How can we test one-way mapping? The idea is that source property change should result in one of the destination property to be changed.
 
 1. Create source object #1 and fill in with values, using seed value 0.
 2. Create source object #2 and fill in with values, using seed value 1. This means every property value in source object #1 is different from corresponding property value in source object #2.
@@ -112,3 +110,14 @@ Limitations
 SampleValueSetter does not add an item automatically if an empty list or dictionary is found. As a result, you need to new-up an element and add it to the list before calling SampleValueSetter. Once it is added, SampleValueSetter will traverse deep to assign values.
 
 One-way mapping testing method suggested here does not catch all problems, but it gets the job done reasonably well, especially if your mapping is one-to-one. 
+
+Just a Thought: No Bi-Directional Mapping for View Model
+--------
+If you were using view model for retrieving and saving, most likely your view model will have responsibility for two different concerns.
+
+1. Contain sufficient data for displaying and editing information
+2. Contain sufficient data for changed information. 
+
+For example, Dropdown control requires value and the list for editing, but you need only new value for saving. On the other hand, Save button may accept user comment so that you can record it on a log. In this case, UserComment property is useful only for saving but not for loading. 
+
+View model contains all properties all the time and they are active depending on the context. You don't want to do this. Separate your Query model from your Command model.
