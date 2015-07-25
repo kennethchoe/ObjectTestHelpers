@@ -3,8 +3,8 @@ What Not To Do
 
 Auto-mappers are great, but you should not assume everything you add will be mapped automatically and successfully since most of them has default behaviour of ignoring non-mappable properties. How do you catch mistakes like:
 
-# You added new property on domain model and view model, but spelled them differently so auto-mapper did not recognize them to be connected.
-# You added new property on domain model and repository's Get() function, but did not change Update() function.
+1. You added new property on domain model and view model, but spelled them differently so auto-mapper did not recognize them to be connected.
+2. You added new property on domain model and repository's Get() function, but did not change Update() function.
 
 Also, you don't want to have test code that repeats mapper code. For example:
 
@@ -34,10 +34,10 @@ Repository pattern can be seen as bi-directional mapping. It maps your domain ob
 
 So how can we test repository code? The idea is,
 
-# Create a domain object and fill in with values
-# Save
-# Retrieve from database
-# Make sure the retrieved one is the same as the first one you asked the repository to save.
+1. Create a domain object and fill in with values
+2. Save
+3. Retrieve from database
+4. Make sure the retrieved one is the same as the first one you asked the repository to save.
 
 Using ObjectTestHelpers, the code looks like this:
 
@@ -81,10 +81,10 @@ If you were using view model for retrieving and saving, most likely your view mo
 
 Anyway, how can we test one-way mapping? The idea is that source property change should result in one of the destination property to be changed.
 
-# Create source object #1 and fill in with values, using seed value 0.
-# Create source object #2 and fill in with values, using seed value 1. This means every property value in source object #1 is different from corresponding property value in source object #2.
-# Map both objects and get two destination objects.
-# Compare each properties in the destination object #1 and #2, and assert they are all different.
+1. Create source object #1 and fill in with values, using seed value 0.
+2. Create source object #2 and fill in with values, using seed value 1. This means every property value in source object #1 is different from corresponding property value in source object #2.
+3. Map both objects and get two destination objects.
+4. Compare each properties in the destination object #1 and #2, and assert they are all different.
 
 ```c#
 public void Source_property_change_should_result_in_destination_property_change()
