@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ObjectTestHelpers</id>
+    <version>1.0.1</version>
+    <title>Object Test Helpers</title>
+    <authors>Kenneth Choe</authors>
+    <owners>Kenneth Choe</owners>
+    <licenseUrl>https://github.com/kennethchoe/ObjectTestHelpers/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/kennethchoe/ObjectTestHelpers</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Test your mapping between domain, view model and database easily and effectively.</description>
+    <releaseNotes>Handles .Net 4.0 and .Net 4.5</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>mapper test</tags>
+  </metadata>
+  <files>
+    <file src="ObjectTestHelpers\bin\Debug.Net40\ObjectTestHelpers.dll" target="lib\net40\ObjectTestHelpers.dll" />
+    <file src="ObjectTestHelpers\bin\Debug.Net40\ObjectTestHelpers.pdb" target="lib\net40\ObjectTestHelpers.pdb" />
+    <file src="ObjectTestHelpers\bin\Debug.Net45\ObjectTestHelpers.dll" target="lib\net45\ObjectTestHelpers.dll" />
+    <file src="ObjectTestHelpers\bin\Debug.Net45\ObjectTestHelpers.pdb" target="lib\net45\ObjectTestHelpers.pdb" />
+  </files>
+</package>
