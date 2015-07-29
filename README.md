@@ -105,6 +105,61 @@ public void Source_property_change_should_result_in_destination_property_change(
 }
 ```
 
+What Happens When There is a Problem
+-------------
+I added IntValue2 on the SampleDomainModel and did not revise SampleRepository. Now BidirectionalMappingTest fails with the following error message. Note that it detected IntValue2 as Changed property, which is a problem.
+
+```
+ObjectTestHelpers.AssertDifferenceException : 1 issue(s) found. See output.
+......
+PROBLEM: Changed property detected: /IntValue2 - 6
+
+Object 1: 
+/IntValue - 1
+/StringValue - 2
+/DateTimeValue - 1/4/2012 12:00:00 AM
+/GuidValue - 00000000-0000-0000-0000-000000000004
+/BoolValue - True
+/IntValue2 - 6
+/CreatedAt - 1/8/2012 12:00:00 AM
+
+Object 2: 
+/IntValue - 1
+/StringValue - 2
+/DateTimeValue - 1/4/2012 12:00:00 AM
+/GuidValue - 00000000-0000-0000-0000-000000000004
+/BoolValue - True
+/IntValue2 - 0
+/CreatedAt - 7/29/2015 2:29:53 PM
+```
+
+Now I added IntValueString2 on the SampleViewModel and did not revise SampleViewModelFactory. Now OneWayMappingTest fails with the following error message. Note that it detected IntValueString2 as Unchanged property, which is a problem.
+
+```
+ObjectTestHelpers.AssertDifferenceException : 1 issue(s) found. See output.
+......
+PROBLEM: Unchanged property detected: /IntValueString2 - null
+
+Object 1: 
+/IntValueString - 1
+/StringValue - 2
+/DateTimeValueString - 1/4/2012 12:00:00 AM
+/GuidValueString - 00000000-0000-0000-0000-000000000004
+/BoolValueString - True
+/IntValueString2 - null
+/StaticValue - static value
+
+Object 2: 
+/IntValueString - 2
+/StringValue - 3
+/DateTimeValueString - 1/5/2012 12:00:00 AM
+/GuidValueString - 00000000-0000-0000-0000-000000000005
+/BoolValueString - False
+/IntValueString2 - null
+/StaticValue - static value
+```
+
+
 Limitations
 -------------
 SampleValueSetter does not add an item automatically if an empty list or dictionary is found. As a result, you need to new-up an element and add it to the list before calling SampleValueSetter. Once it is added, SampleValueSetter will traverse deep to assign values.
